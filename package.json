@@ -1,0 +1,19 @@
+{
+  "name": "pullmyfinger",
+  "version": "1.0.0",
+  "description": "Code review with :+1: and :-1:",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cofounders/pullmyfinger.git"
+  },
+  "author": "Sebastiaan Deckers <seb@cf.sg>",
+  "license": "All Rights Reserved",
+  "bugs": {
+    "url": "https://github.com/cofounders/pullmyfinger/issues"
+  },
+  "homepage": "https://github.com/cofounders/pullmyfinger#readme"
+}
