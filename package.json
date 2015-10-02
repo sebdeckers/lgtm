@@ -18,6 +18,7 @@
   "homepage": "https://github.com/cofounders/pullmyfinger#readme",
   "dependencies": {
     "babel": "^5.8.23",
+    "escape-string-regexp": "^1.0.3",
     "express": "^4.13.3",
     "github-webhook-handler": "^0.5.0",
     "morgan": "^1.6.1"
