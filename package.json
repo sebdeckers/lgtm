@@ -2,7 +2,7 @@
   "name": "pullmyfinger",
   "version": "1.0.0",
   "description": "Code review with :+1: and :-1:",
-  "main": "./app",
+  "main": "server.js",
   "scripts": {
     "test": "mocha"
   },
@@ -24,6 +24,7 @@
     "morgan": "^1.6.1"
   },
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "nodemon": "^1.7.1"
   }
 }
