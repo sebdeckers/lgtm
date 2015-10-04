@@ -1,3 +1,3 @@
 export default event => {
-  console.log(`webhook received: ${ event.event }`)
+  console.log(`GitHub event: ${ event.event }`)
 }
