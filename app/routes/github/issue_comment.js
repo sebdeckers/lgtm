@@ -1,8 +1,8 @@
 import escapeStringRegexp from 'escape-string-regexp'
 
-const votes = ['+1', ':+1:', '-1', ':-1:']
+const votes = ['+1', ':+1:', 'lgtm', '-1', ':-1:']
   .map(escapeStringRegexp)
-  .map(pattern => new RegExp(pattern + '(\\s|$)', 'm'))
+  .map(pattern => new RegExp(pattern + '(\\s|$)', 'im'))
 
 export default ({ payload: { action, issue, comment } }) => {
   if (action !== 'created') return
