@@ -1,13 +1,13 @@
-import * as config from './config'
+import config from './config'
 import http from 'http'
 import express from 'express'
 import morgan from 'morgan'
 import routes from './routes'
 
 const app = express()
-  .use(morgan(config.logFormat))
+  .use(morgan(config.express.logFormat))
   .use(routes)
-  .set('port', config.port)
+  .set('port', config.express.port)
 http
   .createServer(app)
   .listen(app.get('port'))
