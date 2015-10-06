@@ -5,7 +5,10 @@ import issue_comment from './issue_comment'
 import pull_request from './pull_request'
 import wildcard from './wildcard'
 
-const handler = githubWebhookHandler(config.github)
+const handler = githubWebhookHandler({
+  path: config.github.webhook.path,
+  secret: config.github.clientSecret
+})
 handler.on('*', wildcard)
 handler.on('issue_comment', issue_comment)
 handler.on('pull_request', pull_request)
