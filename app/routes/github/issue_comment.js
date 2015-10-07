@@ -1,12 +1,32 @@
+import status from '../../services/github/status'
 import escapeStringRegexp from 'escape-string-regexp'
 
-const votes = ['+1', ':+1:', 'lgtm', '-1', ':-1:']
+const toRegex = patterns => patterns
   .map(escapeStringRegexp)
   .map(pattern => new RegExp(pattern + '(\\s|$)', 'im'))
 
-export default ({ payload: { action, issue, comment } }) => {
+const votes = new Map([
+  ['success', toRegex(['+1', ':+1:', 'lgtm', ':shipit:', ':squirrel:'])],
+  ['failure', toRegex(['-1', ':-1:'])]
+])
+
+export default ({ payload: {
+  action,
+  issue: { pull_request, number },
+  comment: {
+    body,
+    user: { login: author }
+  },
+  repository: {
+    name: repo,
+    owner: { login: user }
+  }
+} }) => {
   if (action !== 'created') return
-  if (!issue.pull_request) return
-  if (!votes.some(vote => vote.test(comment.body))) return
-  console.log(`#${ issue.number } @${ comment.user.login }: ${ comment.body }`)
+  if (!pull_request) return
+  console.log(`#${ number } @${ author }: ${ body }`)
+  const sha = '1234567890abcdef' // TODO: get the latest commit for this PR and check if it has a status
+  for (const [state, patterns] of votes.entries())
+    if (patterns.some(pattern => pattern.test(body)))
+      status(user, repo, sha, state)
 }

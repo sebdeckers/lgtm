@@ -10,13 +10,15 @@ export default {
     oauthToken: process.env.GITHUB_OAUTH_TOKEN,
     application: {
       clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET
+    },
+    branding: {
       context: 'lgtm',
       url: 'https://lgtm.cf.sg'
     },
     webhook: {
       path: '/github/webhook',
-      secret: 'secret' // TODO: Generate unique secret for each repo
+      secret: process.env.GITHUB_WEBHOOK_SECRET
     },
     api: {
       debug: true,
