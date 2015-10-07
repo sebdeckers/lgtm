@@ -2,15 +2,18 @@ import config from '../../config'
 import GitHubApi from 'github'
 import bluebird from 'bluebird'
 
-export default (user, repo) => {
-  const github = new GitHubApi({
-    debug: config.github.api.debug,
-    version: config.github.api.version
-  })
-  github.authenticate({
-    token: config.github.oauthToken,
-    type: 'oauth'
-  })
-  bluebird.promisifyAll(github.statuses)
-  return github
+export default class extends GitHubApi {
+  constructor (user, repo) {
+    super({
+      debug: config.github.api.debug,
+      version: config.github.api.version
+    })
+    this.authenticate({
+      token: config.github.oauthToken,
+      type: 'oauth'
+    })
+    bluebird.promisifyAll(this.statuses)
+    bluebird.promisifyAll(this.pullRequests)
+    bluebird.promisify(this.getLastPage)
+  }
 }

@@ -9,17 +9,16 @@ const descriptions = new Map([
   ['failure', 'Veto']
 ])
 
-export default (user, repo, sha, state) => {
-  const github = new client()
-  return github.statuses.createAsync({
-    user, repo, sha, state,
-    context: config.github.branding.context,
-    description: descriptions.get(state),
-    target_url: urltemplate
-      .parse('{+base}/votes/github{/user,repo,sha}')
-      .expand({
-        user, repo, sha,
-        base: config.github.branding.url
-      })
-  })
-}
+export default (user, repo, sha, state) =>
+  new client(user, repo)
+    .statuses.createAsync({
+      user, repo, sha, state,
+      context: config.github.branding.context,
+      description: descriptions.get(state),
+      target_url: urltemplate
+        .parse('{+base}/votes/github{/user,repo,sha}')
+        .expand({
+          user, repo, sha,
+          base: config.github.branding.url
+        })
+    })
