@@ -12,8 +12,11 @@ export default class extends GitHubApi {
       token: config.github.oauthToken,
       type: 'oauth'
     })
+    bluebird.promisifyAll(this.repos)
     bluebird.promisifyAll(this.statuses)
     bluebird.promisifyAll(this.pullRequests)
-    bluebird.promisify(this.getLastPage)
+    bluebird.promisifyAll(this, { filter: (name, func, target, passesDefaultFilter) =>
+      passesDefaultFilter && /Page$/.test(name)
+    })
   }
 }

@@ -9,8 +9,8 @@ const descriptions = new Map([
   ['failure', 'Rejected']
 ])
 
-export default (user, repo, sha, state) =>
-  new client(user, repo)
+export default async (user, repo, sha, state) => {
+  const result = await new client(user, repo)
     .statuses.createAsync({
       user, repo, sha, state,
       context: config.github.branding.context,
@@ -22,3 +22,6 @@ export default (user, repo, sha, state) =>
           base: config.github.branding.url
         })
     })
+  console.log(`${ user }/${ repo }@${ sha } State changed to ${ state }`)
+  return result
+}

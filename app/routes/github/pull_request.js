@@ -14,8 +14,6 @@ export default async ({ payload: {
   }
 } }) => {
   console.log(`Pull request ${ user }/${ repo }#${ number } ${ action } by ${ contributor }`)
-  if (action !== 'opened') throw Error('Not a new pull request')
-  const result = await status(user, repo, sha, 'pending')
-  console.log(`Status pending for ${ sha }`)
-  return result
+  if (!(action === 'opened' || action === 'synchronize')) throw Error('Not a new or synced pull request')
+  return status(user, repo, sha, 'pending')
 }
