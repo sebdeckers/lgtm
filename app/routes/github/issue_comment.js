@@ -24,8 +24,8 @@ async function getSha(user, repo, number) {
     user, repo, number,
     page: 1, per_page: 1
   })
-  // const [ { sha: head } ] = await github.getLastPageAsync(commits)
-  const [ { sha: head } ] = commits
+  // const [{ sha: head }] = await github.getLastPageAsync(commits)
+  const [{ sha: head }] = commits
   return head
 }
 
