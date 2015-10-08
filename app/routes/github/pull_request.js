@@ -17,4 +17,5 @@ export default async ({ payload: {
   if (action !== 'opened') throw Error('Not a new pull request')
   const result = await status(user, repo, sha, 'pending')
   console.log(`Status pending for ${ sha }`)
+  return result
 }

@@ -54,5 +54,5 @@ export default async ({ payload: {
   if (!state) throw Error('Not a vote')
   const sha = await getSha(user, repo, number)
   if (!await getStatus(user, repo, sha)) throw Error(`No status found for ${ sha }`)
-  status(user, repo, sha, state)
+  return status(user, repo, sha, state)
 }
