@@ -4,9 +4,9 @@ import client from './client'
 
 const descriptions = new Map([
   ['pending', 'Pending a supporting vote'],
-  ['success', 'LGTM'],
+  ['success', 'OK. Looks good to me!'],
   ['error', 'Oops... something went wrong!'],
-  ['failure', 'Veto']
+  ['failure', 'Rejected']
 ])
 
 export default (user, repo, sha, state) =>

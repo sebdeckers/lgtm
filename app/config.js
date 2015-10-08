@@ -13,7 +13,7 @@ export default {
       clientSecret: process.env.GITHUB_CLIENT_SECRET
     },
     branding: {
-      context: 'lgtm',
+      context: 'code-review/lgtm',
       url: 'https://lgtm.cf.sg'
     },
     webhook: {
@@ -21,7 +21,7 @@ export default {
       secret: process.env.GITHUB_WEBHOOK_SECRET
     },
     api: {
-      debug: true,
+      debug: false,
       version: '3.0.0'
     }
   }

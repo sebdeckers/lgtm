@@ -47,12 +47,12 @@ export default async ({ payload: {
     owner: { login: user }
   }
 } }) => {
-  if (action !== 'created') return
-  if (!pull_request) return
-  console.log(`#${ number } @${ author }: ${ body }`)
+  console.log(`${ user }/${ repo }#${ number } @${ author }: ${ body }`)
+  if (action !== 'created') throw Error('Not a new comment')
+  if (!pull_request) throw Error('Not a pull request')
   const state = getState(body)
-  if (!state) return
+  if (!state) throw Error('Not a vote')
   const sha = await getSha(user, repo, number)
-  if (!await getStatus(user, repo, sha)) return
+  if (!await getStatus(user, repo, sha)) throw Error(`No status found for ${ sha }`)
   status(user, repo, sha, state)
 }

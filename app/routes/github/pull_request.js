@@ -13,8 +13,8 @@ export default async ({ payload: {
     }
   }
 } }) => {
-  if (action !== 'opened') return
   console.log(`Pull request ${ user }/${ repo }#${ number } ${ action } by ${ contributor }`)
+  if (action !== 'opened') throw Error('Not a new pull request')
   const result = await status(user, repo, sha, 'pending')
-  console.log('ok!', result)
+  console.log(`Status pending for ${ sha }`)
 }
