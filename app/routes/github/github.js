@@ -5,7 +5,7 @@ import issue_comment from './issue_comment'
 import pull_request from './pull_request'
 import wildcard from './wildcard'
 
-function log(fn) {
+function log (fn) {
   return (...args) => {
     const retval = this::fn(...args)
     retval.catch(::console.log)

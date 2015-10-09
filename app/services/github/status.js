@@ -1,6 +1,6 @@
 import config from '../../config'
 import urltemplate from 'url-template'
-import client from './client'
+import Client from './client'
 
 const descriptions = new Map([
   ['pending', 'Pending a supporting vote'],
@@ -10,7 +10,7 @@ const descriptions = new Map([
 ])
 
 export default async (user, repo, sha, state) => {
-  const result = await new client(user, repo)
+  const result = await new Client(user, repo)
     .statuses.createAsync({
       user, repo, sha, state,
       context: config.github.branding.context,

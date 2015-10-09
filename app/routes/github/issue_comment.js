@@ -1,7 +1,7 @@
 import config from '../../config'
 import status from '../../services/github/status'
 import escapeStringRegexp from 'escape-string-regexp'
-import client from '../../services/github/client'
+import Client from '../../services/github/client'
 
 const toRegex = patterns => patterns
   .map(escapeStringRegexp)
@@ -12,14 +12,13 @@ const votes = new Map([
   ['failure', toRegex(['-1', ':-1:'])]
 ])
 
-function parseVote(body) {
+function parseVote (body) {
   for (const [state, patterns] of votes.entries())
-    if (patterns.some(pattern => pattern.test(body)))
-      return state
+    if (patterns.some(pattern => pattern.test(body))) return state
 }
 
-async function getSha(user, repo, number) {
-  const github = new client(user, repo)
+async function getSha (user, repo, number) {
+  const github = new Client(user, repo)
   let commits = await github.pullRequests.getCommitsAsync({
     user, repo, number,
     page: 1, per_page: 1
@@ -31,14 +30,14 @@ async function getSha(user, repo, number) {
   return head
 }
 
-async function getStatus(user, repo, sha) {
-  const github = new client(user, repo)
+async function getStatus (user, repo, sha) {
+  const github = new Client(user, repo)
   const statuses = await github.statuses.getAsync({ user, repo, sha })
   return statuses.some(({ context }) => context === config.github.branding.context)
 }
 
-async function isCollaborator(user, repo, collabuser) {
-  const github = new client(user, repo)
+async function isCollaborator (user, repo, collabuser) {
+  const github = new Client(user, repo)
   return github.repos.getCollaboratorAsync({ user, repo, collabuser })
 }
 
@@ -59,8 +58,8 @@ export default async ({ payload: {
   if (!pull_request) throw Error('Not a pull request')
   const state = parseVote(body)
   if (!state) throw Error('Not a vote')
-  if (!await isCollaborator(user, repo, author)) throw Error('Not a collaborator')
+  if (!(await isCollaborator(user, repo, author))) throw Error('Not a collaborator')
   const sha = await getSha(user, repo, number)
-  if (!await getStatus(user, repo, sha)) throw Error(`No status found for ${ sha }`)
+  if (!(await getStatus(user, repo, sha))) throw Error(`No status found for ${ sha }`)
   return status(user, repo, sha, state)
 }
