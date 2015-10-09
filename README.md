@@ -1,14 +1,14 @@
-# Pullmyfinger
-Code review with :+1: and :-1:
+# Looks Good To Me (LGTM)
+Code reviews enforced with :+1: and :-1:.
 
-[![Join the chat at https://gitter.im/cofounders/pullmyfinger](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cofounders/pullmyfinger)
+[![Join the chat at https://gitter.im/cofounders/lgtm](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cofounders/lgtm)
 
 [![Build Status](https://img.shields.io/codeship/2246d6c0-0833-0133-b703-025d73056a1f.svg)](https://codeship.com/projects/90230)
 
 ## Set up localtunnel
 
 ```
-DEBUG=* lt -p 3000 -s pullmyfinger
+DEBUG=* lt -p 3000 -s lgtm
 ```
 
 ## Run while coding

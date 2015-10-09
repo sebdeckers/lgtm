@@ -1,5 +1,5 @@
 {
-  "name": "pullmyfinger",
+  "name": "lgtm",
   "version": "1.0.0",
   "description": "Code review with :+1: and :-1:",
   "main": "server.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cofounders/pullmyfinger.git"
+    "url": "git+https://github.com/cofounders/lgtm.git"
   },
   "author": "Sebastiaan Deckers <seb@cf.sg>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cofounders/pullmyfinger/issues"
+    "url": "https://github.com/cofounders/lgtm/issues"
   },
-  "homepage": "https://github.com/cofounders/pullmyfinger#readme",
+  "homepage": "https://github.com/cofounders/lgtm#readme",
   "dependencies": {
     "babel": "^5.8.23",
     "bluebird": "^2.10.2",
