@@ -1,5 +1,4 @@
 import config from '../../config'
-import express from 'express'
 import githubWebhookHandler from 'github-webhook-handler'
 import issue_comment from './issue_comment'
 import pull_request from './pull_request'
@@ -21,6 +20,4 @@ handler.on('*', wildcard)
 handler.on('issue_comment', log(issue_comment))
 handler.on('pull_request', log(pull_request))
 
-const router = express.Router()
-router.use(handler)
-export default router
+export default handler
