@@ -21,12 +21,19 @@
     "wordwrap@0.0.2",
     "jsonify@0.0.0",
     "indexof@0.0.1",
-    "optimist@0.2.8",
+    "optimist@0.2.8||0.6.1",
     "asn1@0.1.11",
     "aws-sign2@0.5.0",
     "commondir@0.0.1",
     "ctype@0.5.3",
     "htmlescape@1.1.0",
-    "tunnel-agent@0.4.1"
+    "tunnel-agent@0.4.1",
+    "undefsafe@0.0.3",
+    "yargs@3.5.4",
+    "event-stream@0.5.3",
+    "mkdirp@0.3.0",
+    "ps-tree@0.0.3",
+    "rx-lite@2.5.2",
+    "sync-exec@0.5.0"
   ]
 }
