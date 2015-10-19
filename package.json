@@ -16,7 +16,7 @@
     "watch-test-audit": "watch-spawn -q -p './package.json' npm run test-audit",
     "watch-test-lint": "watch-spawn -q -p 'src/**/*.js' npm run test-lint",
     "watch-backend": "node-inspector & nodemon --debug --watch src/backend --watch test & lt -p 3000 -s lgtm",
-    "watch-frontend": "npm run watch-frontend-js",
+    "watch-frontend": "npm run watch-frontend-js & npm run watch-frontend-css & npm run watch-frontend-html",
     "watch-frontend-js": "watchify src/frontend/app.js --transform babelify --outfile dist/app.js -dv",
     "watch-frontend-css": "watch-spawn -q -p 'src/frontend/**/*.css' npm run build-frontend-css",
     "watch-frontend-html": "watch-spawn -q -p 'src/frontend/**/*.html' npm run build-frontend-html",
