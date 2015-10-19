@@ -1,2 +1,2 @@
 require('babel/register')
-require('./backend')
+require('./src/backend')

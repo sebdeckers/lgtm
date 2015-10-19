@@ -9,22 +9,21 @@
     "test-js": "mocha",
     "test-audit": "node-license-validator",
     "test-lint": "standard",
-    "clean": "rimraf dist",
-    "watch": "npm run clean && mkdirp dist && npm-watch & npm run watch-frontend & npm run watch-backend",
+    "clean": "rimraf dist && mkdirp dist",
+    "watch": "npm run clean && npm run watch-test & npm run watch-frontend & npm run watch-backend",
+    "watch-test": "npm run watch-test-js & npm run watch-test-audit & npm run watch-test-lint",
+    "watch-test-js": "watch-spawn -q -p 'src/**/*.js' npm run test-js",
+    "watch-test-audit": "watch-spawn -q -p './package.json' npm run test-audit",
+    "watch-test-lint": "watch-spawn -q -p 'src/**/*.js' npm run test-lint",
     "watch-backend": "nodemon & lt -p 3000 -s lgtm",
     "watch-frontend": "npm run watch-frontend-js",
-    "watch-frontend-js": "watchify frontend/app.js --transform babelify --outfile dist/app.js -dv",
-    "build": "mkdirp dist && npm run build-frontend-js && npm run build-frontend-css && npm run build-frontend-html",
-    "build-frontend-css": "postcss --use autoprefixer --dir dist frontend/**/*.css",
-    "build-frontend-html": "cpy frontend/**/*.html dist",
-    "build-frontend-js": "browserify frontend/app.js --transform babelify --outfile dist/app.js"
-  },
-  "watch": {
-    "test-js": "**/*.js",
-    "test-audit": "./package.json",
-    "test-lint": "**/*.js",
-    "build-frontend-css": "frontend/app.css",
-    "build-frontend-html": "frontend/index.html"
+    "watch-frontend-js": "watchify src/frontend/app.js --transform babelify --outfile dist/app.js -dv",
+    "watch-frontend-css": "watch-spawn -q -p 'src/frontend/**/*.css' npm run build-frontend-css",
+    "watch-frontend-html": "watch-spawn -q -p 'src/frontend/**/*.html' npm run build-frontend-html",
+    "build": "npm run build-frontend-js && npm run build-frontend-css && npm run build-frontend-html",
+    "build-frontend-css": "postcss --use autoprefixer --dir dist src/frontend/**/*.css",
+    "build-frontend-html": "cpy src/frontend/**/*.html dist",
+    "build-frontend-js": "browserify src/frontend/app.js --transform babelify --outfile dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -64,6 +63,7 @@
     "sinon": "^1.17.1",
     "sinon-chai": "^2.8.0",
     "standard": "^5.3.1",
+    "watch-spawn": "^1.0.5",
     "watchify": "^3.4.0"
   },
   "standard": {
