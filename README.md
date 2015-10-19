@@ -8,5 +8,5 @@ Code review with :+1: and :-1:.
 ## Development
 
 ```
-nodemon & lt -p 3000 -s lgtm
+npm run watch
 ```
