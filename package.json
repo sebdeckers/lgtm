@@ -20,7 +20,9 @@
     "build-frontend-js": "browserify frontend/app.js --transform babelify --outfile dist/app.js"
   },
   "watch": {
-    "test-lint": "backend/**/*.js",
+    "test-js": "**/*.js",
+    "test-audit": "./package.json",
+    "test-lint": "**/*.js",
     "build-frontend-css": "frontend/app.css",
     "build-frontend-html": "frontend/index.html"
   },
