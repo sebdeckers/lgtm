@@ -1,5 +1,5 @@
 import express from 'express'
-import path from 'path'
+import { nearestSync } from 'nearest-file-path'
 
-const directory = [__dirname, '..', '..', '..', 'dist']
-export default express.static(path.join(...directory))
+const directory = nearestSync('dist')
+export default express.static(directory)
