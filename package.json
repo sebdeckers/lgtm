@@ -9,21 +9,19 @@
     "test-js": "mocha",
     "test-audit": "node-license-validator",
     "test-lint": "standard",
-    "clean": "rimraf dist && mkdirp dist",
-    "watch": "npm run clean && npm run watch-test & npm run watch-frontend & npm run watch-backend",
+    "clean": "rimraf dist",
+    "watch": "npm run clean && mkdirp dist && npm run watch-test & npm run watch-frontend & npm run watch-backend",
     "watch-test": "npm run watch-test-js & npm run watch-test-audit & npm run watch-test-lint",
     "watch-test-js": "watch-spawn --quiet --pattern 'src/**/*.js' npm run test-js",
     "watch-test-audit": "watch-spawn --quiet --pattern './package.json' npm run test-audit",
     "watch-test-lint": "watch-spawn --quiet --pattern 'src/**/*.js' npm run test-lint",
     "watch-backend": "node-inspector & nodemon --debug --watch src/backend --watch test & lt --port 3000 --subdomain lgtm",
-    "watch-frontend": "npm run watch-frontend-js & npm run watch-frontend-css & npm run watch-frontend-html",
-    "watch-frontend-js": "watchify src/frontend/app.js --transform babelify --outfile dist/app.js -dv",
-    "watch-frontend-css": "watch-spawn --initial --quiet --pattern 'src/frontend/**/*.css' npm run build-frontend-css",
-    "watch-frontend-html": "watch-spawn --initial --quiet --pattern 'src/frontend/**/*.html' npm run build-frontend-html",
-    "build": "npm run build-frontend-js && npm run build-frontend-css && npm run build-frontend-html",
-    "build-frontend-css": "postcss --use autoprefixer --dir dist src/frontend/**/*.css",
-    "build-frontend-html": "cpy src/frontend/**/*.html dist",
-    "build-frontend-js": "browserify src/frontend/app.js --transform babelify --outfile dist/app.js"
+    "watch-frontend": "npm run watch-frontend-js & npm run watch-frontend-html",
+    "watch-frontend-js": "watchify src/frontend/app.js --transform babelify --transform stringify --transform [ cssy --processor 'cssy/autoprefixer' ] --outfile dist/app.js --debug --verbose",
+    "watch-frontend-html": "watch-spawn --initial --quiet --pattern 'src/frontend/index.html' npm run build-frontend-html",
+    "build": "mkdirp dist && npm run build-frontend-js && npm run build-frontend-html",
+    "build-frontend-html": "cpy src/frontend/index.html dist",
+    "build-frontend-js": "browserify src/frontend/app.js --transform babelify --transform stringify --transform [ cssy --processor 'cssy/autoprefixer' ] --outfile dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -41,18 +39,25 @@
     "babelify": "^6.3.0",
     "bluebird": "^2.10.2",
     "browserify": "^11.2.0",
+    "bubbly": "^1.1.2",
     "cpy": "^3.4.1",
     "cssy": "^2.0.2",
+    "dom4": "^1.5.2",
+    "domready": "^1.0.8",
     "escape-string-regexp": "^1.0.3",
     "express": "^4.13.3",
     "github": "^0.2.4",
     "github-webhook-handler": "^0.5.0",
+    "insert-css": "git+https://github.com/cbas/insert-css.git",
     "mkdirp": "^0.5.1",
     "morgan": "^1.6.1",
     "nearest-file-path": "^1.1.0",
+    "parasol": "^1.0.1",
     "postcss": "^5.0.9",
     "postcss-cli": "^2.2.0",
-    "url-template": "^2.0.6"
+    "stringify": "^3.1.0",
+    "url-template": "^2.0.6",
+    "webcomponents.js": "^0.7.2"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.3",
@@ -74,17 +79,5 @@
   },
   "engines": {
     "node": "^4.1.2"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "cssy",
-        {
-          "processor": [
-            "cssy/autoprefixer"
-          ]
-        }
-      ]
-    ]
   }
 }

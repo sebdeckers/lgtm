@@ -1,0 +1,8 @@
+header:before {
+  position: absolute;
+  content: '\1F44D';
+  font-size: 128px;
+}
+h1 {
+  display: none;
+}
