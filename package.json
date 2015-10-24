@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/cofounders/lgtm#readme",
   "dependencies": {
+    "auth0-js": "^6.7.4",
     "autoprefixer": "^6.0.3",
     "babel": "^5.8.23",
     "babelify": "^6.3.0",
@@ -66,7 +67,7 @@
     "localtunnel": "^1.7.0",
     "mocha": "^2.3.3",
     "node-inspector": "^0.12.3",
-    "node-license-validator": "^1.2.0",
+    "node-license-validator": "^1.2.1",
     "nodemon": "^1.7.1",
     "npm-watch": "0.0.1",
     "sinon": "^1.17.1",
