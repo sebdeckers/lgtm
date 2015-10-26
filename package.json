@@ -47,6 +47,7 @@
     "domready": "^1.0.8",
     "escape-string-regexp": "^1.0.3",
     "express": "^4.13.3",
+    "express-history-api-fallback": "^2.0.0",
     "github": "^0.2.4",
     "github-webhook-handler": "^0.5.0",
     "insert-css": "git+https://github.com/cbas/insert-css.git",
