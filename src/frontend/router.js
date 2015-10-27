@@ -9,16 +9,13 @@ export default class Router {
     window::on('popstate', event => this.trigger())
   }
 
-  @chain
-  route (pattern, handler) {
+  @chain route (pattern, handler) {
     const template = uriTemplates(pattern)
     const predicate = template.fromUri
     this.routes.set(predicate, handler)
   }
 
-  @chain
-  trigger () {
-    const path = location.pathname + location.search + location.hash
+  @chain trigger (path = location.pathname + location.search + location.hash) {
     for (const [predicate, handler] of this.routes.entries()) {
       const params = predicate(path)
       if (params) {
