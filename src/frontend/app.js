@@ -7,7 +7,7 @@ import Router from './router'
 import loginElement from './components/Login'
 
 new Router()
-  .route('/', url => {
+  .route('/', params => {
     const Login = document.registerElement('lgtm-login', loginElement)
     const login = new Login()
     document.body.appendChild(login)

@@ -59,6 +59,7 @@
     "postcss-cli": "^2.2.0",
     "rimraf": "^2.4.3",
     "stringify": "^3.1.0",
+    "uri-templates": "^0.1.9",
     "url-template": "^2.0.6",
     "webcomponents.js": "^0.7.2"
   },

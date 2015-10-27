@@ -1,57 +1,29 @@
-/* global URL location */
+/* global location */
 import { on } from 'bubbly'
-
-function pathNames (url) {
-  return url.length > 0
-    ? url.pathname.substring(1).split('/')
-    : []
-}
-
-function paramNames (url) {
-  return url.length > 0
-    ? url.search // Polyfill: url.searchParams.toString()
-      .split('&')
-      .map(pair => pair.split('=', 1))
-    : []
-}
-
-function match (pattern) {
-  const patternSlugs = pathNames(pattern)
-  const patternParams = paramNames(pattern)
-  return url => {
-    const urlSlugs = pathNames(url)
-    const urlParams = paramNames(url)
-    return urlSlugs.every(
-      (slug, index) =>
-        slug.at(0) === ':' ||
-        slug === patternSlugs[index]
-    ) &&
-    patternParams.every(
-      param => urlParams.includes(param)
-    )
-  }
-}
+import uriTemplates from 'uri-templates'
 
 export default class Router {
   constructor (base = location.origin) {
     this.base = base
     this.routes = new Map()
-
-    window::on('popstate', event => {
-      const url = new URL(location)
-      for (const [predicate, handler] of this.routes.entries()) {
-        if (predicate(url)) {
-          handler(url)
-          break
-        }
-      }
-    })
+    window::on('popstate', event => this.trigger())
   }
 
   route (pattern, handler) {
-    const parsed = new URL(pattern, this.base)
-    const predicate = match(parsed)
+    const template = uriTemplates(pattern)
+    const predicate = template.fromUri
     this.routes.set(predicate, handler)
     return this
+  }
+
+  trigger () {
+    const path = location.pathname + location.search + location.hash
+    for (const [predicate, handler] of this.routes.entries()) {
+      const params = predicate(path)
+      if (params) {
+        handler(params)
+        break
+      }
+    }
   }
 }
