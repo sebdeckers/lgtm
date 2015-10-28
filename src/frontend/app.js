@@ -8,7 +8,9 @@ import loginElement from './components/Login'
 
 new Router()
   .route('/', params => {
-    const Login = document.registerElement('lgtm-login', loginElement)
-    const login = new Login()
+    try {
+      document.registerElement('lgtm-login', loginElement)
+    } catch (error) {}
+    const login = document.createElement('lgtm-login')
     document.body.appendChild(login)
   })
