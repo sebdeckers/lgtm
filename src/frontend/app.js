@@ -14,3 +14,8 @@ new Router()
     const login = document.createElement('lgtm-login')
     document.body.appendChild(login)
   })
+  .route('/foo{?bar,test}', params => {
+    const message = document.createElement('pre')
+    message.textContent = `Hey it worked! \n ${JSON.stringify(params, null, 2)}`
+    document.body.appendChild(message)
+  })
