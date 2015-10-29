@@ -7,7 +7,9 @@ import anechoic from './decorators/anechoic'
 export default class Router {
   constructor (routes = new Map()) {
     this.routes = routes
-    window::on('popstate', event => this.trigger())
+    window::on('popstate', event => this.trigger(
+      location.pathname + location.search + location.hash
+    ))
   }
 
   @chain
@@ -19,7 +21,7 @@ export default class Router {
 
   @chain
   @anechoic
-  trigger (path = location.pathname + location.search + location.hash) {
+  trigger (path) {
     for (const [predicate, handler] of this.routes.entries()) {
       const params = predicate(path)
       if (params) {
