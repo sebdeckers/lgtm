@@ -36,7 +36,11 @@
   "dependencies": {
     "auth0-js": "^6.7.4",
     "autoprefixer": "^6.0.3",
-    "babel": "^5.8.23",
+    "babel-core": "^6.0.12",
+    "babel-plugin-syntax-async-functions": "^6.0.2",
+    "babel-plugin-syntax-decorators": "^6.0.2",
+    "babel-plugin-syntax-function-bind": "^6.0.2",
+    "babel-preset-es2015": "^6.0.12",
     "babelify": "^6.3.0",
     "bluebird": "^2.10.2",
     "browserify": "^11.2.0",
