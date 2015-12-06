@@ -1,2 +1,3 @@
-require('babel-core/register')
+require('babel-register')
+require('babel-polyfill')
 require('./src/backend')
