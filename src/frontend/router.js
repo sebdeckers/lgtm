@@ -17,7 +17,7 @@ export default class Router {
       event.preventDefault()
       if (link && link.origin === window.location.origin) {
         event.preventDefault()
-        history.pushState(null, '', link.href)
+        window.history.pushState(null, '', link.href)
         this.trigger(link)
       }
     })
