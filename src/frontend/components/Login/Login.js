@@ -14,7 +14,7 @@ export default class Login extends HTMLElement {
     if (WebComponents.ShadowCSS) {
       WebComponents.ShadowCSS.shimStyling(root, this.tagName)
     }
-    this::on('click', event => {
+    this.shadowRoot.querySelector('button')::on('click', event => {
       new Auth0(config.auth0).login({ connection: 'github' })
     })
   }
